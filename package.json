@@ -1,0 +1,82 @@
+{
+  "name": "valodaiv",
+  "productName": "ValoDaiv",
+  "description": "not bannable , uses the local client api",
+  "author": "Daived",
+  "private": true,
+  "version": "0.2.0",
+  "main": "public/main.js",
+  "homepage": "./",
+  "build": {
+    "extends": null,
+    "appId": "com.valodaiv.app",
+    "compression": "maximum",
+    "asar": true,
+    "forceCodeSigning": false,
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "installerLanguages": ["en_US"]
+    },
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "zip",  "arch": ["x64"] }
+      ],
+      "icon": "icon.ico"
+    },
+    "files": [
+      "build/**/*",
+      "public/main.js",
+      "node_modules/**/*",
+      "package.json",
+      "!node_modules/**/{README,CHANGELOG,readme,changelog}.md",
+      "!node_modules/**/*.{ts,map}",
+      "!node_modules/**/test/**",
+      "!node_modules/**/tests/**",
+      "!node_modules/**/__tests__/**",
+      "!node_modules/**/docs/**",
+      "!node_modules/**/example/**",
+      "!node_modules/**/examples/**"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"vite\" \"node scripts/wait-and-launch.js\"",
+    "electron:build": "vite build && cmd /C \"set CSC_IDENTITY_AUTO_DISCOVERY=false&& npx electron-builder -c.extraMetadata.main=public/main.js\""
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.9",
+    "adm-zip": "^0.5.10",
+    "axios": "^1.4.0",
+    "electron-is-dev": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "sweetalert2": "^11.7.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.14",
+    "electron": "^28.0.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.2",
+    "wait-on": "^9.0.5"
+  }
+}
